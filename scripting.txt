@@ -1,0 +1,51 @@
+1.a) Telnet to a server: telnet hostname
+
+1.b) SSH to a server: ssh user@hostname/ipaddress
+
+1.c) Check disk usage: df -h
+
+1.d) Inode usage: df -i
+
+1.e) Get list of files from path: ls, ls -l, ls -a
+
+1.f) Copy files from remote server using FTP, SFTP, SCP: 
+                                            ftp:  ftp user@hostname
+                                                  get filename newfilname
+
+                                            sftp: sftp user@hostname
+                                                  get filename newfilname
+
+                                            scp: scp username@source:/location/to/file username@destination:/where/to/put
+
+2) Connect to telnet and zip files and unzip files:
+                                            telnet hostname
+                                            touch filename
+                                            zip zipfilename file1, file2, file3
+                                            unzip zipfilename
+
+3) Restart apache on high load:
+        #!/bin/bash
+        MAXLOAD=5
+        check=$(uptime | awk -F'average: ' '{print $2}' | awk '{print $1}' | tr -d ',')
+        if [[ $check > $MAXLOAD ]]; then
+            /sbin/service httpd stop
+            echo "Server Stopped"
+            sleep 300
+            /sbin/service httpd start
+            echo "Server Started"
+        fi
+
+4b) CMD to identify which process are consuming more memory:
+        ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+
+5) Create a view:
+        CREATE VIEW view_name AS SELECT QUERY...
+
+6) Insert 10 values in the table
+	INSERT INTO table(c1,c2,...)
+		VALUES 
+   	(v11,v12,...),
+   	(v21,v22,...),
+    	...
+   	(vnn,vn2,...);
+
